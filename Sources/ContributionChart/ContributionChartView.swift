@@ -42,6 +42,7 @@ public struct ContributionChartView: View {
 }
 
 struct ContributionChartRowView: View {
+    @Environment(\.colorScheme) var colorScheme
     
     var rowData: [Double]
     var rows: Int
@@ -51,6 +52,7 @@ struct ContributionChartRowView: View {
     var heatMapRectangleSpacing: Double
     
     let blockBackgorundColor: Color = Color(hexString: "DCDCDC")
+    let darkBlockBackgorundColor: Color = Color(hexString: "646464")
     
     var body: some View {
         VStack(spacing: heatMapRectangleSpacing) {
@@ -60,7 +62,7 @@ struct ContributionChartRowView: View {
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
                         )
-                        .foregroundColor(blockBackgorundColor)
+                        .foregroundColor(colorScheme == .dark ? darkBlockBackgorundColor : blockBackgorundColor)
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
                         .foregroundColor(blockColor
