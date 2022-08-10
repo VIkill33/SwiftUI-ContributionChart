@@ -2,7 +2,7 @@ import SwiftUI
 import UIKit
 
 @available(*, deprecated, renamed: "ContributionChart")
-public struct ContributionChart: View {
+public struct ContributionChartView: View {
     
     var data: [Double]
     var rows: Int
