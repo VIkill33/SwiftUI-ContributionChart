@@ -29,11 +29,11 @@ public struct ContributionChartView: View {
                 let end = (i + 1) * rows
                 let splitedData = Array(data[start..<end])
                 ContributionChartRowView(rowData: splitedData,
-                               rows: rows,
-                               targetValue: targetValue,
-                               blockColor: blockColor,
-                               heatMapRectangleWidth: heatMapRectangleWidth,
-                               heatMapRectangleSpacing: heatMapRectangleSpacing
+                                         rows: rows,
+                                         targetValue: targetValue,
+                                         blockColor: blockColor,
+                                         heatMapRectangleWidth: heatMapRectangleWidth,
+                                         heatMapRectangleSpacing: heatMapRectangleSpacing
                 )
             }
         }
@@ -50,7 +50,7 @@ struct ContributionChartRowView: View {
     var heatMapRectangleWidth: Double
     var heatMapRectangleSpacing: Double
     
-    let blockBackgorundColor: Color = Color(.displayP3, red: 220.0, green: 220.0, blue: 220.0, opacity: 220.0)
+    let blockBackgorundColor: Color = Color(hexString: "DCDCDC")
     
     var body: some View {
         VStack(spacing: heatMapRectangleSpacing) {
@@ -60,7 +60,7 @@ struct ContributionChartRowView: View {
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
                         )
-                        .foregroundColor(Color.gray)
+                        .foregroundColor(blockBackgorundColor)
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
                         .foregroundColor(blockColor
@@ -71,5 +71,25 @@ struct ContributionChartRowView: View {
         .onAppear() {
             print(rowData)
         }
+    }
+}
+
+extension Color {
+    init(hexString: String) {
+        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt64()
+        Scanner(string: hex).scanHexInt64(&int)
+        let r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (r, g, b) = ((int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (r, g, b) = (int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (r, g, b) = (int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (r, g, b) = (0, 0, 0)
+        }
+        self.init(red: Double(r) / 255, green: Double(g) / 255, blue: Double(b) / 255)
     }
 }
