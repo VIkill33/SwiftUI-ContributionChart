@@ -39,10 +39,18 @@ struct HeatMapRowView: View {
     var body: some View {
         VStack(spacing: heatMapRectangleSpacing) {
             ForEach(0..<rows) { index in
-                let saturationValue: Double = Double(rowData[index]) / Double(targetValue)
-                RoundedRectangle(cornerRadius: 5.0)
-                    .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
-                    .foregroundColor(Color(hue: 0.329, saturation: saturationValue, brightness: 0.729))
+                let opacityRatio: Double = Double(rowData[index]) / Double(targetValue)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 5.0)
+                        .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
+                        
+                        
+                        )
+                        .foregroundColor(Color(.displayP3, red: 220, green: 220, blue: 220, opacity: 1.0))
+                    RoundedRectangle(cornerRadius: 5.0)
+                        .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
+                        .foregroundColor(Color.green.opacity(opacityRatio))
+                }
             }
         }
         .onAppear() {
