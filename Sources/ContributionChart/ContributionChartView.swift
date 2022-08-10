@@ -60,7 +60,7 @@ struct ContributionChartRowView: View {
                         .foregroundColor(Color("BlockBackgroundColor"))
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
-                        .foregroundColor(blockColor.opacity(opacityRatio))
+                        .foregroundColor(blockColor).opacity(opacityRatio)
                 }
             }
         }
