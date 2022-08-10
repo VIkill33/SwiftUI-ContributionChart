@@ -52,7 +52,7 @@ struct ContributionChartRowView: View {
     var heatMapRectangleSpacing: Double
     
     let blockBackgorundColor: Color = Color(hexString: "DCDCDC")
-    let darkBlockBackgorundColor: Color = Color(hexString: "323232")
+    let darkBlockBackgorundColor: Color = Color(hexString: "505050")
     
     var body: some View {
         VStack(spacing: heatMapRectangleSpacing) {
