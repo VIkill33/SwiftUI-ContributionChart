@@ -31,6 +31,7 @@ public struct ContributionChartView: View {
                 ContributionChartRowView(rowData: splitedData,
                                rows: rows,
                                targetValue: targetValue,
+                               blockColor: blockColor,
                                heatMapRectangleWidth: heatMapRectangleWidth,
                                heatMapRectangleSpacing: heatMapRectangleSpacing
                 )
@@ -45,7 +46,7 @@ struct ContributionChartRowView: View {
     var rowData: [Double]
     var rows: Int
     var targetValue: Double
-    
+    var blockColor: Color
     var heatMapRectangleWidth: Double
     var heatMapRectangleSpacing: Double
     var body: some View {
@@ -59,7 +60,7 @@ struct ContributionChartRowView: View {
                         .foregroundColor(Color("BlockBackgroundColor"))
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
-                        .foregroundColor(Color.green.opacity(opacityRatio))
+                        .foregroundColor(blockColor.opacity(opacityRatio))
                 }
             }
         }
