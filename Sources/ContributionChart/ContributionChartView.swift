@@ -60,7 +60,7 @@ struct ContributionChartRowView: View {
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
                         )
-                        .foregroundColor(blockBackgorundColor)
+                        .foregroundColor(Color.gray)
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
                         .foregroundColor(blockColor
