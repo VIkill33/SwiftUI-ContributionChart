@@ -10,6 +10,16 @@ public struct ContributionChartView: View {
     var targetValue: Double
     var heatMapRectangleWidth: Double = 20.0
     var heatMapRectangleSpacing: Double = 2.0
+    
+    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
+        self.data = data
+        self.rows = rows
+        self.columns = columns
+        self.targetValue = targetValue
+        self.heatMapRectangleWidth = RectangleWidth
+        self.heatMapRectangleSpacing = RectangleSpacing
+    }
+    
     public var body: some View {
         HStack(spacing: heatMapRectangleSpacing) {
             ForEach(0..<columns) { i in
