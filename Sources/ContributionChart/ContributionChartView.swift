@@ -8,14 +8,16 @@ public struct ContributionChartView: View {
     var rows: Int
     var columns: Int
     var targetValue: Double
+    var blockColor: Color = Color.green
     var heatMapRectangleWidth: Double = 20.0
     var heatMapRectangleSpacing: Double = 2.0
     
-    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
+    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
         self.data = data
         self.rows = rows
         self.columns = columns
         self.targetValue = targetValue
+        self.blockColor = blockColor
         self.heatMapRectangleWidth = RectangleWidth
         self.heatMapRectangleSpacing = RectangleSpacing
     }
