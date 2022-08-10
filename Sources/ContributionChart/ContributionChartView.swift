@@ -49,6 +49,9 @@ struct ContributionChartRowView: View {
     var blockColor: Color
     var heatMapRectangleWidth: Double
     var heatMapRectangleSpacing: Double
+    
+    let blockBackgorundColor: Color = Color(.displayP3, red: 220.0, green: 220.0, blue: 220.0, opacity: 220.0)
+    
     var body: some View {
         VStack(spacing: heatMapRectangleSpacing) {
             ForEach(0..<rows) { index in
@@ -57,10 +60,11 @@ struct ContributionChartRowView: View {
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
                         )
-                        .foregroundColor(Color("BlockBackgroundColor"))
+                        .foregroundColor(blockBackgorundColor)
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
-                        .foregroundColor(blockColor).opacity(opacityRatio)
+                        .foregroundColor(blockColor)
+                        .opacity(opacityRatio)
                 }
             }
         }
