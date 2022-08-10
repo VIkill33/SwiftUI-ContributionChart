@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-@available(*, deprecated, renamed: "ContributionChart")
+@available(iOS 13, macOS 10.15, watchOS 6, *)
 public struct ContributionChartView: View {
     
     var data: [Double]
