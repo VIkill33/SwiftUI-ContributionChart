@@ -53,10 +53,8 @@ struct ContributionChartRowView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
-                        
-                        
                         )
-                        .foregroundColor(Color(.displayP3, red: 220, green: 220, blue: 220, opacity: 1.0))
+                        .foregroundColor(Color("BlockBackgroundColor"))
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
                         .foregroundColor(Color.green.opacity(opacityRatio))
