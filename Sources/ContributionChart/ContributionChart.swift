@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-@available(*, deprecated, renamed: "IrregularGradient")
+@available(*, deprecated, renamed: "ContributionChart")
 struct ContributionChartView: View {
     
     var data: [Double]
