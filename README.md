@@ -51,7 +51,7 @@ ContributionChartView(data: yourData,
 ```
 Make sure that yourData (**a double array**) you pass has exactly `yourRows * yourColumns` numbers, and the targetValue is recommanded to set to the max value of the array.
 
-The color of a block will appear as exactly the color as parameter `blockColor` when its value is equal to targetValue, and appears light gray when is equal to zero.
+The color of a block will appear as exactly the color as parameter `blockColor` when its value is equal to `targetValue`, and appears light gray when is equal to zero.
 
 The top-Leading block represents the first value in array, while the bottom-trailing represents the last. And the order follows as below:
 
