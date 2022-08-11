@@ -1,4 +1,10 @@
 # ContributionChart
+<p>
+    <img src="https://img.shields.io/badge/iOS-13.0%2B-blue" />
+    <img src="https://img.shields.io/badge/macOS-10.15%2B-green" />
+    <img src="https://img.shields.io/badge/watchOS-6.0%2B-yellow" />
+    <img src="https://img.shields.io/badge/-SwiftUI-orange" />
+</p>
 
 A contribution chart (aka. heatmap, GitHub-like) library for iOS, macOS, and watchOS.
 
