@@ -16,7 +16,7 @@ A contribution chart (aka. heatmap, GitHub-like) library for iOS, macOS, and wat
 
 # It Supports
 ## Custom Block Number
-Of course, you can also custom the spacing between blocks.
+Of course, you can also custom the **size** of blocks and **spacing** between blocks.
 
 <img src="https://user-images.githubusercontent.com/78488529/183973081-d743c369-8f61-4c72-a211-b51183bf28f2.JPEG" width="255" height="482"> <img src="https://user-images.githubusercontent.com/78488529/183973087-22c09508-c9d1-4a77-b87c-dfbd4a4ded63.JPEG" width="255" height="482">
 
@@ -40,7 +40,7 @@ and paste in the repo's url:
 Or you can download the code of this repo, then `Add Local...` in Xcode, and open the folder of the repo.
 
 # Usage
-- Import this package after you've installed by `import ContributionChart`
+- Import this package after you installed by `import ContributionChart`
 - Use the chart like
 ```swift
 ContributionChartView(data: yourData,
