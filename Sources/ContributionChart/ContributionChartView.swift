@@ -12,6 +12,8 @@ public struct ContributionChartView: View {
     var heatMapRectangleWidth: Double = 20.0
     var heatMapRectangleSpacing: Double = 2.0
     
+    @State var valueText = "Title"
+    
     public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
         self.data = data
         self.rows = rows
@@ -23,21 +25,31 @@ public struct ContributionChartView: View {
     }
     
     public var body: some View {
-        HStack(spacing: heatMapRectangleSpacing) {
-            ForEach(0..<columns) { i in
-                let start = i * rows
-                let end = (i + 1) * rows
-                let splitedData = Array(data[start..<end])
-                ContributionChartRowView(rowData: splitedData,
-                                         rows: rows,
-                                         targetValue: targetValue,
-                                         blockColor: blockColor,
-                                         heatMapRectangleWidth: heatMapRectangleWidth,
-                                         heatMapRectangleSpacing: heatMapRectangleSpacing
-                )
+        VStack {
+            // Title
+            HStack{
+                Text(valueText)
+                Spacer()
+            }
+            // Chart
+            HStack(spacing: heatMapRectangleSpacing) {
+                ForEach(0..<columns) { i in
+                    let start = i * rows
+                    let end = (i + 1) * rows
+                    let splitedData = Array(data[start..<end])
+                    ContributionChartRowView(rowData: splitedData,
+                                             rows: rows,
+                                             targetValue: targetValue,
+                                             blockColor: blockColor,
+                                             heatMapRectangleWidth: heatMapRectangleWidth,
+                                             heatMapRectangleSpacing: heatMapRectangleSpacing,
+                                             valueText: $valueText
+                    )
+                }
             }
         }
         .padding()
+        
     }
 }
 
@@ -54,6 +66,8 @@ struct ContributionChartRowView: View {
     let blockBackgorundColor: Color = Color(hexString: "E6E6E6")
     let darkBlockBackgorundColor: Color = Color(hexString: "161A22")
     
+    @Binding var valueText: String
+    
     var body: some View {
         VStack(spacing: heatMapRectangleSpacing) {
             ForEach(0..<rows) { index in
@@ -67,6 +81,9 @@ struct ContributionChartRowView: View {
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
                         .foregroundColor(blockColor
                             .opacity(opacityRatio))
+                }
+                .onTapGesture{
+                    valueText = String(rowData[index])
                 }
             }
         }
