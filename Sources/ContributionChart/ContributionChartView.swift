@@ -47,9 +47,14 @@ public struct ContributionChartView: View {
                     )
                 }
             }
+            .onTouch(perform: <#T##(CGPoint) -> Void#>)
         }
         .padding()
         
+    }
+    
+    func updateValueText(_ location: CGPoint) {
+        print(location)
     }
 }
 
@@ -81,9 +86,6 @@ struct ContributionChartRowView: View {
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
                         .foregroundColor(blockColor
                             .opacity(opacityRatio))
-                }
-                .onTapGesture{
-                    valueText = String(rowData[index])
                 }
             }
         }
