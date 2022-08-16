@@ -47,7 +47,7 @@ public struct ContributionChartView: View {
                     )
                 }
             }
-            .onTouch(perform: <#T##(CGPoint) -> Void#>)
+            .onTouch(perform: updateValueText)
         }
         .padding()
         
