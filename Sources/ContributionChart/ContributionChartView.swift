@@ -32,19 +32,21 @@ public struct ContributionChartView: View {
                 Spacer()
             }
             // Chart
-            HStack(spacing: heatMapRectangleSpacing) {
-                ForEach(0..<columns) { i in
-                    let start = i * rows
-                    let end = (i + 1) * rows
-                    let splitedData = Array(data[start..<end])
-                    ContributionChartRowView(rowData: splitedData,
-                                             rows: rows,
-                                             targetValue: targetValue,
-                                             blockColor: blockColor,
-                                             heatMapRectangleWidth: heatMapRectangleWidth,
-                                             heatMapRectangleSpacing: heatMapRectangleSpacing,
-                                             valueText: $valueText
-                    )
+            GeometryReader { geo in
+                HStack(spacing: heatMapRectangleSpacing) {
+                    ForEach(0..<columns) { i in
+                        let start = i * rows
+                        let end = (i + 1) * rows
+                        let splitedData = Array(data[start..<end])
+                        ContributionChartRowView(rowData: splitedData,
+                                                 rows: rows,
+                                                 targetValue: targetValue,
+                                                 blockColor: blockColor,
+                                                 heatMapRectangleWidth: heatMapRectangleWidth,
+                                                 heatMapRectangleSpacing: heatMapRectangleSpacing,
+                                                 valueText: $valueText
+                        )
+                    }
                 }
             }
             .onTouch(perform: updateValueText)
