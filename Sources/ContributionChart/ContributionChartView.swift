@@ -47,9 +47,9 @@ public struct ContributionChartView: View {
                                                  valueText: $valueText
                         )
                     }
+                    .onTouch(perform: updateValueText)
                 }
                 .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                .onTouch(perform: updateValueText)
             }
         }
         .padding()
