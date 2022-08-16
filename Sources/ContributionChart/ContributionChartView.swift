@@ -33,8 +33,8 @@ public struct ContributionChartView: View {
             }
             // Chart
             GeometryReader { geo in
-                HStack(spacing: heatMapRectangleSpacing) {
-                    ZStack {
+                ZStack {
+                    HStack(spacing: heatMapRectangleSpacing) {
                         ForEach(0..<columns) { i in
                             let start = i * rows
                             let end = (i + 1) * rows
