@@ -49,8 +49,8 @@ public struct ContributionChartView: View {
                     }
                 }
                 .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                .onTouch(perform: updateValueText)
             }
-            .onTouch(perform: updateValueText)
         }
         .padding()
         
