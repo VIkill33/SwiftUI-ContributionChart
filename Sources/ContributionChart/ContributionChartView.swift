@@ -29,11 +29,6 @@ public struct ContributionChartView: View {
     
     public var body: some View {
         VStack {
-            // Title
-            HStack{
-                Text(valueText)
-                Spacer()
-            }
             // Chart
             GeometryReader { geo in
                 ZStack {
