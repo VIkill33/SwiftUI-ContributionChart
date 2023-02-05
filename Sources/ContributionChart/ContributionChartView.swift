@@ -9,17 +9,20 @@ public struct ContributionChartView: View {
     var columns: Int
     var targetValue: Double
     var blockColor: Color = Color.green
+    var blockBackgroundColor: Color = Color(hexString: "E6E6E6")
+    
     var heatMapRectangleWidth: Double = 20.0
     var heatMapRectangleSpacing: Double = 2.0
     
     @State var valueText = "Title"
     
-    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
+    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, blockBackgroundColor: Color = Color(red: 230/255, green: 230/255, blue: 230/255), RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
         self.data = data
         self.rows = rows
         self.columns = columns
         self.targetValue = targetValue
         self.blockColor = blockColor
+        self.blockBackgroundColor = blockBackgroundColor
         self.heatMapRectangleWidth = RectangleWidth
         self.heatMapRectangleSpacing = RectangleSpacing
     }
@@ -43,6 +46,7 @@ public struct ContributionChartView: View {
                                                      rows: rows,
                                                      targetValue: targetValue,
                                                      blockColor: blockColor,
+                                                     blockBackgroundColor: blockBackgroundColor,
                                                      heatMapRectangleWidth: heatMapRectangleWidth,
                                                      heatMapRectangleSpacing: heatMapRectangleSpacing,
                                                      valueText: $valueText
@@ -73,11 +77,9 @@ struct ContributionChartRowView: View {
     var rows: Int
     var targetValue: Double
     var blockColor: Color
+    var blockBackgroundColor: Color
     var heatMapRectangleWidth: Double
     var heatMapRectangleSpacing: Double
-    
-    let blockBackgorundColor: Color = Color(hexString: "E6E6E6")
-    let darkBlockBackgorundColor: Color = Color(hexString: "161A22")
     
     @Binding var valueText: String
     
@@ -89,7 +91,7 @@ struct ContributionChartRowView: View {
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
                         )
-                        .foregroundColor(colorScheme == .dark ? darkBlockBackgorundColor : blockBackgorundColor)
+                        .foregroundColor(colorScheme == .dark ? blockBackgroundColor.colorInvert() as! Color : blockBackgroundColor)
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
                         .foregroundColor(blockColor
