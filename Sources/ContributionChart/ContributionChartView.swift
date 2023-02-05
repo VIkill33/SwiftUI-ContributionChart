@@ -16,7 +16,7 @@ public struct ContributionChartView: View {
     
     @State var valueText = "Title"
     
-    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, blockBackgroundColor: Color = Color(red: 230/255, green: 230/255, blue: 230/255), RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
+    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, blockBackgroundColor: Color = Color(UIColor.systemBackground), RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
         self.data = data
         self.rows = rows
         self.columns = columns
@@ -86,7 +86,7 @@ struct ContributionChartRowView: View {
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
                         )
-                        .foregroundColor(colorScheme == .dark ? blockBackgroundColor.colorInvert() as! Color : blockBackgroundColor)
+                        .foregroundColor(blockBackgroundColor)
                     RoundedRectangle(cornerRadius: 5.0)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
                         .foregroundColor(blockColor
