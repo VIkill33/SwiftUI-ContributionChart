@@ -14,8 +14,6 @@ public struct ContributionChartView: View {
     var heatMapRectangleWidth: Double = 20.0
     var heatMapRectangleSpacing: Double = 2.0
     
-    @State var valueText = "Title"
-    
     public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, blockBackgroundColor: Color = Color(UIColor.systemBackground), RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
         self.data = data
         self.rows = rows
@@ -43,12 +41,10 @@ public struct ContributionChartView: View {
                                                      blockColor: blockColor,
                                                      blockBackgroundColor: blockBackgroundColor,
                                                      heatMapRectangleWidth: heatMapRectangleWidth,
-                                                     heatMapRectangleSpacing: heatMapRectangleSpacing,
-                                                     valueText: $valueText
+                                                     heatMapRectangleSpacing: heatMapRectangleSpacing
                             )
                         }
                     }
-                    .onTouch(perform: updateValueText)
                 }
                 .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 .onAppear {
@@ -58,10 +54,6 @@ public struct ContributionChartView: View {
         }
         .padding()
         
-    }
-    
-    func updateValueText(_ location: CGPoint) {
-        print(location)
     }
 }
 
@@ -75,8 +67,6 @@ struct ContributionChartRowView: View {
     var blockBackgroundColor: Color
     var heatMapRectangleWidth: Double
     var heatMapRectangleSpacing: Double
-    
-    @Binding var valueText: String
     
     var body: some View {
         VStack(spacing: heatMapRectangleSpacing) {
