@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 
 @available(iOS 13, macOS 10.15, watchOS 6, *)
 public struct ContributionChartView: View {
@@ -9,18 +8,28 @@ public struct ContributionChartView: View {
     var columns: Int
     var targetValue: Double
     var blockColor: Color = Color.green
-    var blockBackgroundColor: Color = Color(hexString: "E6E6E6")
+    var blockBackgroundColor: Color = Color.background
     
     var heatMapRectangleWidth: Double = 20.0
     var heatMapRectangleSpacing: Double = 2.0
     
-    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, blockBackgroundColor: Color = Color(UIColor.systemBackground), RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
+    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, blockBackgroundColor: Color, RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
         self.data = data
         self.rows = rows
         self.columns = columns
         self.targetValue = targetValue
         self.blockColor = blockColor
         self.blockBackgroundColor = blockBackgroundColor
+        self.heatMapRectangleWidth = RectangleWidth
+        self.heatMapRectangleSpacing = RectangleSpacing
+    }
+    
+    public init(data: [Double], rows: Int, columns: Int, targetValue: Double, blockColor: Color = Color.green, RectangleWidth: Double = 20.0, RectangleSpacing: Double = 2.0){
+        self.data = data
+        self.rows = rows
+        self.columns = columns
+        self.targetValue = targetValue
+        self.blockColor = blockColor
         self.heatMapRectangleWidth = RectangleWidth
         self.heatMapRectangleSpacing = RectangleSpacing
     }
@@ -108,4 +117,13 @@ extension Color {
         }
         self.init(red: Double(r) / 255, green: Double(g) / 255, blue: Double(b) / 255)
     }
+#if os(macOS)
+    static let background = Color(NSColor.windowBackgroundColor)
+    static let secondaryBackground = Color(NSColor.underPageBackgroundColor)
+    static let tertiaryBackground = Color(NSColor.controlBackgroundColor)
+#else
+    static let background = Color(UIColor.systemBackground)
+    static let secondaryBackground = Color(UIColor.secondarySystemBackground)
+    static let tertiaryBackground = Color(UIColor.tertiarySystemBackground)
+#endif
 }
