@@ -43,7 +43,7 @@ public struct ContributionChartView: View {
             GeometryReader { geo in
                 ZStack {
                     HStack(spacing: heatMapRectangleSpacing) {
-                        ForEach(0..<columns) { i in
+                        ForEach(0..<columns, id: \.self) { i in
                             let start = i * rows
                             let end = (i + 1) * rows
                             let splitedData = Array(data[start..<end])
@@ -84,7 +84,7 @@ struct ContributionChartRowView: View {
     
     var body: some View {
         VStack(spacing: heatMapRectangleSpacing) {
-            ForEach(0..<rows) { index in
+            ForEach(0..<rows, id: \.self) { index in
                 ZStack {
                     RoundedRectangle(cornerRadius: heatMapRectangleRadius)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
