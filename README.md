@@ -14,6 +14,9 @@ A contribution chart (aka. heatmap, GitHub-like) library for iOS, macOS, and wat
 - [Usage](#usage)
 - [Demo Code](#demo-code)
 
+Updates
+- 7/31/24 Support input array with any length and add a demo app inside.
+
 # It Supports
 ## Custom Block Number
 Of course, you can also custom the **size** of blocks and **spacing** between blocks.
@@ -49,7 +52,7 @@ ContributionChartView(data: yourData,
                       targetValue: yourTargetValue,
                       blockColor: .green)
 ```
-Make sure that yourData (**a double array**) you pass has exactly `yourRows * yourColumns` numbers, and the targetValue is recommanded to set to the max value of the array.
+yourData is (**a double array**), and the targetValue is recommanded to set to the max value of the array.
 
 The color of a block will appear as exactly the color as parameter `blockColor` when its value is equal to `targetValue`, and appears light gray when is equal to zero.
 
