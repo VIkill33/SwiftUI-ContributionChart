@@ -30,6 +30,10 @@ public struct ContributionChartView: View {
         self.data = data
         self.rows = rows
         self.columns = columns
+        if data.count < rows * columns {
+            let elementsToAdd = Array(repeating: 0.0, count: rows * columns - data.count)
+            self.data.append(contentsOf: elementsToAdd)
+        }
         self.targetValue = targetValue
         self.blockColor = blockColor
         self.heatMapRectangleWidth = RectangleWidth
@@ -103,7 +107,7 @@ struct ContributionChartRowView: View {
     }
     
     func opacityRatio(index: Int) -> Double {
-        var opacityRatio: Double = Double(rowData[index]) / Double(targetValue)
+        let opacityRatio: Double = Double(rowData[index]) / Double(targetValue)
         return opacityRatio > 1.0 ? 1.0 : opacityRatio
     }
     
@@ -137,7 +141,7 @@ extension Color {
     static let secondaryBackground = Color(UIColor.secondarySystemBackground)
     static let tertiaryBackground = Color(UIColor.tertiarySystemBackground)
 #endif
-    #if os(watchOS)
+#if os(watchOS)
     static let background = Color.black
-    #endif
+#endif
 }
