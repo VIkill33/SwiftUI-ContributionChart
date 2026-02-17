@@ -37,6 +37,13 @@ ContributionChartView(
 | `RectangleSpacing` | `2.0` | Gap between blocks |
 | `RectangleRadius` | `5.0` | Corner radius |
 
+### Customization tips
+- **Block size:** `RectangleWidth` — use ~20 for 4-week views, ~10 for 6-month, ~6 for yearly
+- **Circles:** Set `RectangleRadius` to half of `RectangleWidth`
+- **Square corners:** `RectangleRadius: 0`
+- **Dense grids:** Reduce `RectangleSpacing` to 1 for large time ranges
+- **Time range picker:** Use a `TimeRange` enum mapping `.month`/`.quarter`/`.halfYear`/`.year` to different `rows`, `columns`, and block sizes — see README for full example
+
 ### Connecting data sources
 - **Static data:** Pass any `[Double]` array directly
 - **Core Data / REST API:** Fetch in `.task { }` or `.onAppear { }`, store in `@State`, pass to chart

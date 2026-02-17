@@ -15,6 +15,9 @@ A contribution chart (aka. heatmap, GitHub-like) library for iOS, macOS, and wat
   * [New App](#new-app)
   * [Existing App](#existing-app)
   * [All Parameters](#all-parameters)
+- [Customization](#customization)
+  * [Styling](#styling)
+  * [Time Range Picker](#time-range-picker)
 - [Usage](#usage)
 - [Demo Code](#demo-code)
 - [Apple Health Examples](#apple-health-examples)
@@ -165,6 +168,150 @@ Replace the static array with data from your app — Core Data, a REST API, or A
 | `RectangleWidth` | `Double` | `20.0` | Width and height of each block in points. |
 | `RectangleSpacing` | `Double` | `2.0` | Spacing between blocks in points. |
 | `RectangleRadius` | `Double` | `5.0` | Corner radius of each block. |
+
+# Customization
+
+## Styling
+
+Adjust block size, spacing, radius, and colors to match your app's design:
+
+```swift
+// Compact chart with small rounded blocks
+ContributionChartView(
+    data: data,
+    rows: 7,
+    columns: 12,
+    targetValue: 1.0,
+    blockColor: .blue,
+    RectangleWidth: 10,
+    RectangleSpacing: 1,
+    RectangleRadius: 2
+)
+
+// Large blocks with square corners and custom background
+ContributionChartView(
+    data: data,
+    rows: 5,
+    columns: 6,
+    targetValue: 100,
+    blockColor: .orange,
+    blockBackgroundColor: Color(.systemGray5),
+    RectangleWidth: 30,
+    RectangleSpacing: 4,
+    RectangleRadius: 0
+)
+
+// Circular blocks
+ContributionChartView(
+    data: data,
+    rows: 7,
+    columns: 4,
+    targetValue: 1.0,
+    blockColor: .purple,
+    RectangleWidth: 16,
+    RectangleSpacing: 3,
+    RectangleRadius: 8  // half of width = circle
+)
+```
+
+## Time Range Picker
+
+A common pattern is letting users switch between time ranges — last month, 90 days, 180 days, or a full year. Each range uses different `rows` and `columns` values to create an appropriately sized grid.
+
+```swift
+import SwiftUI
+import ContributionChart
+
+enum TimeRange: String, CaseIterable, Identifiable {
+    case month = "30 Days"
+    case quarter = "90 Days"
+    case halfYear = "180 Days"
+    case year = "1 Year"
+
+    var id: String { rawValue }
+    var days: Int {
+        switch self {
+        case .month:    return 30
+        case .quarter:  return 91
+        case .halfYear: return 182
+        case .year:     return 364
+        }
+    }
+    /// Rows = days per column (7 = one week per column)
+    var rows: Int { 7 }
+    /// Columns = number of weeks to display
+    var columns: Int { days / rows }
+    /// Smaller blocks for larger time ranges to keep the chart compact
+    var blockWidth: Double {
+        switch self {
+        case .month:    return 20
+        case .quarter:  return 14
+        case .halfYear: return 10
+        case .year:     return 6
+        }
+    }
+    var blockSpacing: Double {
+        switch self {
+        case .month:    return 3
+        case .quarter:  return 2
+        case .halfYear: return 1.5
+        case .year:     return 1
+        }
+    }
+}
+
+struct ActivityDashboard: View {
+    @State private var selectedRange: TimeRange = .month
+    @State private var data: [Double] = []
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Activity")
+                .font(.title2.bold())
+
+            Picker("Time Range", selection: $selectedRange) {
+                ForEach(TimeRange.allCases) { range in
+                    Text(range.rawValue).tag(range)
+                }
+            }
+            .pickerStyle(.segmented)
+
+            ContributionChartView(
+                data: data,
+                rows: selectedRange.rows,
+                columns: selectedRange.columns,
+                targetValue: 10_000,
+                blockColor: .green,
+                RectangleWidth: selectedRange.blockWidth,
+                RectangleSpacing: selectedRange.blockSpacing,
+                RectangleRadius: selectedRange.blockWidth / 4
+            )
+            .frame(height: 200)
+            .animation(.easeInOut, value: selectedRange)
+        }
+        .padding()
+        .onChange(of: selectedRange) {
+            loadData()
+        }
+        .task {
+            loadData()
+        }
+    }
+
+    private func loadData() {
+        // Replace with real data fetching (Core Data, REST API, Apple Health, etc.)
+        data = (0..<selectedRange.days).map { _ in
+            Double.random(in: 0...10_000)
+        }
+    }
+}
+
+#Preview {
+    ActivityDashboard()
+}
+```
+
+This pattern works with any data source. Replace the `loadData()` body with a call to your `HealthKitManager`, a Core Data fetch, or a network request. The `TimeRange` enum handles the grid math and block sizing automatically.
 
 # Usage
 - Import this package after you installed by `import ContributionChart`
