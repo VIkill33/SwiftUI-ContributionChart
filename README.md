@@ -11,6 +11,10 @@ A contribution chart (aka. heatmap, GitHub-like) library for iOS, macOS, and wat
   * [Custom Block Color](#custom-block-color)
   * [Dark mode](#dark-mode)
 - [Installation](#installation)
+- [QuickStart](#quickstart)
+  * [New App](#new-app)
+  * [Existing App](#existing-app)
+  * [All Parameters](#all-parameters)
 - [Usage](#usage)
 - [Demo Code](#demo-code)
 - [Apple Health Examples](#apple-health-examples)
@@ -45,6 +49,122 @@ and paste in the repo's url:
 `https://github.com/VIkill33/SwiftUI-ContributionChart.git`
 
 Or you can download the code of this repo, then `Add Local...` in Xcode, and open the folder of the repo.
+
+# QuickStart
+
+## New App
+
+Create a fresh iOS project with ContributionChart in under 5 minutes:
+
+**1. Create the project**
+
+Open Xcode and select `File -> New -> Project...`. Choose **App** under the iOS tab. Set the interface to **SwiftUI** and language to **Swift**. Name your project and click Create.
+
+**2. Add ContributionChart**
+
+In your new project, go to `File -> Add Package Dependencies...`. Paste the package URL:
+
+```
+https://github.com/VIkill33/SwiftUI-ContributionChart.git
+```
+
+Select **Up to Next Major Version** and click Add Package. When prompted, make sure `ContributionChart` is added to your app target.
+
+**3. Replace ContentView.swift**
+
+Open `ContentView.swift` and replace its contents with:
+
+```swift
+import SwiftUI
+import ContributionChart
+
+struct ContentView: View {
+    // Sample data: 28 days of activity scores (0.0 to 1.0)
+    let data: [Double] = [
+        0.2, 0.8, 0.5, 0.3, 0.9, 0.1, 0.7,
+        0.4, 0.6, 0.8, 0.2, 0.5, 0.3, 0.9,
+        0.7, 0.1, 0.4, 0.6, 0.8, 0.5, 0.2,
+        0.9, 0.3, 0.7, 0.1, 0.6, 0.4, 0.8
+    ]
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("My Activity")
+                .font(.title2.bold())
+
+            ContributionChartView(
+                data: data,
+                rows: 7,          // 7 days per column
+                columns: 4,       // 4 weeks
+                targetValue: 1.0,  // max value for full color
+                blockColor: .green
+            )
+            .frame(height: 200)
+        }
+        .padding()
+    }
+}
+
+#Preview {
+    ContentView()
+}
+```
+
+**4. Run**
+
+Press `Cmd + R` to build and run. You should see a green heatmap grid in the simulator.
+
+## Existing App
+
+**1. Add the package**
+
+Go to `File -> Add Package Dependencies...` and paste:
+
+```
+https://github.com/VIkill33/SwiftUI-ContributionChart.git
+```
+
+Select **Up to Next Major Version** and add it to your target.
+
+**2. Import and use**
+
+In any SwiftUI view file, add the import and embed the chart:
+
+```swift
+import ContributionChart
+
+// Inside your view body:
+ContributionChartView(
+    data: yourDataArray,  // [Double] — your values
+    rows: 7,              // blocks per column
+    columns: 4,           // number of columns
+    targetValue: 100,     // value that gets full color intensity
+    blockColor: .blue
+)
+.frame(height: 200)
+```
+
+The chart automatically pads with zeros if your data array is shorter than `rows x columns`, so you don't need to worry about exact array lengths.
+
+**3. Connect real data**
+
+Replace the static array with data from your app — Core Data, a REST API, or Apple Health (see [Apple Health Examples](#apple-health-examples) below). The chart just needs a `[Double]` array where each element maps to one block.
+
+## All Parameters
+
+`ContributionChartView` has two initializers. The only difference is whether you provide a custom `blockBackgroundColor`:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `data` | `[Double]` | *required* | Values for each block. Auto-pads with zeros if shorter than rows x columns. |
+| `rows` | `Int` | *required* | Number of blocks per column (vertical). |
+| `columns` | `Int` | *required* | Number of columns (horizontal). |
+| `targetValue` | `Double` | *required* | Value at which a block shows full color intensity. Values above this are clamped. |
+| `blockColor` | `Color` | `.green` | The hue used for filled blocks. Intensity varies by value/targetValue ratio. |
+| `blockBackgroundColor` | `Color` | System background | Background color for empty/zero blocks. Omit to use the platform default. |
+| `RectangleWidth` | `Double` | `20.0` | Width and height of each block in points. |
+| `RectangleSpacing` | `Double` | `2.0` | Spacing between blocks in points. |
+| `RectangleRadius` | `Double` | `5.0` | Corner radius of each block. |
 
 # Usage
 - Import this package after you installed by `import ContributionChart`
