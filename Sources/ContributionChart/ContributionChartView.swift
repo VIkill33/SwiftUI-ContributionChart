@@ -1,6 +1,6 @@
 import SwiftUI
 
-@available(iOS 13, macOS 10.15, watchOS 6, *)
+@available(iOS 15, macOS 12, tvOS 15, watchOS 8, *)
 public struct ContributionChartView: View {
     
     var data: [Double]
@@ -64,9 +64,6 @@ public struct ContributionChartView: View {
                     }
                 }
                 .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                .onAppear {
-                    print(geo.size.width, geo.size.height)
-                }
             }
         }
         .padding()
@@ -93,16 +90,13 @@ struct ContributionChartRowView: View {
                     RoundedRectangle(cornerRadius: heatMapRectangleRadius)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center
                         )
-                        .foregroundColor(blockBackgroundColor)
+                        .foregroundStyle(blockBackgroundColor)
                     RoundedRectangle(cornerRadius: heatMapRectangleRadius)
                         .frame(width: heatMapRectangleWidth, height: heatMapRectangleWidth, alignment: .center)
-                        .foregroundColor(blockColor
+                        .foregroundStyle(blockColor
                             .opacity(opacityRatio(index: index)))
                 }
             }
-        }
-        .onAppear() {
-            print(rowData)
         }
     }
     
